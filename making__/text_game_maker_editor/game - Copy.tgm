@@ -1,0 +1,23 @@
+[Game speed_1]
+[Scene color_ff0000]
+[title] Text Editor
+[image source_castle.png]
+#Story Begins
+[0'story] This is a story of a guy who was
+[0'option] Good
+[0'option] Bad
+[0'option] Dead
+
+[0 > 1'story] He lived in a good place with many things to play.
+[0 > 2'story] He lived in a bad place with nothing to play with.
+[0 > 2'story] Is he still bad
+[0 > 2'option] Yes
+[0 > 2'option] No he was good
+[0 > 2'option] No he died
+[0 > 2 > 1'Story] Yes he was bad
+[0 > 2 > 1'End] Ok bye!
+[0 > 2 > 2'Goto_0_1]
+
+[0 > 2 > 3'Goto_0_3]
+
+[0 > 3'End] Yes he was dead
