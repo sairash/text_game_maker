@@ -5,6 +5,7 @@ from tkinter.filedialog import askopenfilename
 from tkinter.font import Font
 from PIL import ImageTk,Image
 import webbrowser
+import os
 
 
 previous_text_starts_at=0
@@ -34,33 +35,36 @@ def save_file():
         text = txt_edit.get(1.0, tk.END).split("\n")
         text = "\n".join(text[:-1])
         if text != '\r':
-        	output_file.write(text)
+            output_file.write(text)
     window.title(f"Text Game Maker")
 
 
+def run_file():
+    os.system('cmd /k "python --version"')
+
 
 def key_binds(event):
-	txt_edit.tag_delete('here')
-	global previous_text_starts_at, previous_text_ends_at
-	if event.keysym == 'o':
-		open_file()
-	elif event.keysym == 's':
-		save_file()
+    txt_edit.tag_delete('here')
+    global previous_text_starts_at, previous_text_ends_at
+    if event.keysym == 'o':
+        open_file()
+    elif event.keysym == 's':
+        save_file()
 
-	for syntax_line in range(int(float(txt_edit.index('end')))):
-		print(syntax_line)
-		index =  txt_edit.search(r'\[*\]', str(float(syntax_line)), tk.END, regexp=True)
-		txt_edit.tag_add("here", str(float(syntax_line)+0.1), index)
-	
-	txt_edit.tag_config("here", foreground="green")
+    for syntax_line in range(int(float(txt_edit.index('end')))):
+        print(syntax_line)
+        index =  txt_edit.search(r'\[*\]', str(float(syntax_line)), tk.END, regexp=True)
+        txt_edit.tag_add("here", str(float(syntax_line)+0.1), index)
+    
+    txt_edit.tag_config("here", foreground="green")
 
 def make_bold():
 
     # tk.TclError exception is raised if not text is selecte
-	try:
-		txt_edit.tag_add("BOLD", "sel.first", "sel.last")
-	except tk.TclError:
-		pass
+    try:
+        txt_edit.tag_add("BOLD", "sel.first", "sel.last")
+    except tk.TclError:
+        pass
 
 
 
@@ -84,7 +88,7 @@ git_sairash = tk.Label( fr_buttons, text='git: @sairash' , cursor="hand2")
 btn_new = tk.Button(fr_buttons, text="New", command=save_file, cursor="hand2")
 btn_open = tk.Button(fr_buttons, text="Open", command=open_file, cursor="hand2")
 btn_save = tk.Button(fr_buttons, text="Save", command=save_file, cursor="hand2")
-btn_run = tk.Button(fr_buttons, text="Run", command=make_bold, cursor="hand2")
+btn_run = tk.Button(fr_buttons, text="Run", command=run_file, cursor="hand2")
 
 canvas.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
 btn_new.grid(row=1, column=0, sticky="ew", padx=5)
